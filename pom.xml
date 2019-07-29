@@ -6,7 +6,7 @@
 	<artifactId>CounterWebApp</artifactId>
 	<packaging>war</packaging>
 	<version>1.0</version>
-	<name>CounterWebApp Maven ApplicationWebapp</name>
+	<name>CounterWebApp Maven Application</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<jdk.version>1.7</jdk.version>
