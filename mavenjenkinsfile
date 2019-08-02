@@ -1,0 +1,54 @@
+env.defaultEmail = 'Ravindra.mca25@gmail.com'
+
+node('master'){
+   try {
+     if(SCM == 'true'){
+       stage('SCM') {
+         git branch: 'master', url: 'https://github.com/adabalaravi/counterwebapp.git'
+         }
+     }else
+     {
+        echo "SCM stage is not selected"
+     }
+     
+    if(BuildCode == 'true'){
+      stage('BuildCode') {
+        def mvn_home = tool name: 'Maven-3.12.0', type: 'maven'
+        sh "${mvn_home}/bin/mvn package -Dproject.version=${project_version}"
+      }
+    }else
+    {
+      echo "Build stage is not selected"
+    }
+     
+    if(Print == 'true'){
+      stage('Print') {
+        echo "Hello this is ${env.JOB_NAME} job executed by ${User_Name}"
+      }
+    }else
+    {
+      echo "PRINT stage is not selected"
+    }
+   }
+   catch (e) {
+    currentBuild.result = "FAILED"
+    notifyFailed()
+    throw e
+  }
+  notifySuccessful() 
+}
+def notifyFailed() {
+    emailext (
+    subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+    body: """FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' Check console output at ${env.BUILD_URL}""",
+    to:  "${env.defaultEmail}"   
+  )
+}
+
+def notifySuccessful() {
+  emailext (
+    subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+    body: """SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'  Check console output at ${env.BUILD_URL}""",
+    to:  "${env.defaultEmail}"    
+  )
+}
