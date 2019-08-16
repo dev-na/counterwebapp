@@ -5,7 +5,7 @@
 	<groupId>com.mkyong</groupId>
 	<artifactId>CounterWebApp</artifactId>
 	<packaging>war</packaging>
-	<version>1.0</version>
+	<version>${project.version}</version>
 	<name>CounterWebApp Maven Application</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -70,13 +70,6 @@
 		</dependency>
 
 	</dependencies>
-     <distributionManagement>
-		
-		<repository>
-		<id>nexus-releases</id>
-			<url>http://localhost:8081/repository/maven-releases1/</url>
-		</repository>
-  </distributionManagement>
 	<build>
 		<finalName>CounterWebApp</finalName>
 
