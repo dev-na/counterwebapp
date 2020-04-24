@@ -1,0 +1,6 @@
+[submodule "AntProject"]
+	path = AntProject
+	url = https://github.com/adabalaravi/AntProject.git
+[submodule "gitmerge"]
+	path = gitmerge
+	url = https://github.com/adabalaravi/gitmerge.git
